@@ -17,7 +17,7 @@ Este módulo Terraform cria uma infraestrutura de rede robusta e flexível em m�
 - 🏗️ **Modular**: Arquitetura bem estruturada e reutilizável
 - ✅ **Validado**: Validações automáticas de consistência
 - 📊 **Observável**: Outputs detalhados para integração
-- 🔒 **Seguro**: Análise de segurança com Checkov
+- �️ **Seguro**: Análise de segurança com Checkov e práticas AWS
 - 📚 **Documentado**: Documentação automática e exemplos
 
 ## 📦 Instalação

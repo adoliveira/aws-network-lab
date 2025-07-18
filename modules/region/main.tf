@@ -28,13 +28,15 @@ resource "aws_internet_gateway" "main" {
 }
 
 # Subnets Públicas (uma por AZ)
+# Nota: map_public_ip_on_launch = false para melhor segurança (CKV_AWS_130)
+# IPs públicos devem ser atribuídos explicitamente quando necessário
 resource "aws_subnet" "public" {
   count = length(var.availability_zones)
 
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidrs[count.index]
   availability_zone       = var.availability_zones[count.index]
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = merge(var.tags, {
     Name = "${var.region_name}-public-subnet-${substr(var.availability_zones[count.index], -1, 1)}"
