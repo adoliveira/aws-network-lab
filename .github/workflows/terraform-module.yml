@@ -8,6 +8,11 @@ on:
   release:
     types: [ published ]
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 env:
   TF_VERSION: '1.9.0'
   TF_DOCS_VERSION: 'v0.17.0'
@@ -53,6 +58,7 @@ jobs:
 
     - name: Run Checkov
       run: |
+        echo "🔒 Executando análise de segurança com Checkov..."
         checkov --framework terraform \
                 --check CKV_AWS_79,CKV_AWS_130,CKV_AWS_135,CKV_AWS_83,CKV_AWS_24 \
                 --directory . \
@@ -60,12 +66,41 @@ jobs:
                 --output sarif \
                 --output-file-path console,checkov-report.sarif \
                 --soft-fail
+        
+        echo ""
+        echo "📊 Resumo da análise de segurança:"
+        if [ -f "checkov-report.sarif" ]; then
+          echo "✅ Arquivo SARIF gerado: checkov-report.sarif"
+        else
+          echo "⚠️  Arquivo SARIF não foi gerado"
+        fi
 
     - name: Upload Checkov SARIF file
       uses: github/codeql-action/upload-sarif@v3
-      if: always()
+      if: always() && github.event_name != 'pull_request'
+      continue-on-error: true
       with:
         sarif_file: checkov-report.sarif
+
+    - name: Checkov Results Summary
+      if: always()
+      run: |
+        echo "📋 RESUMO DOS RESULTADOS CHECKOV"
+        echo "================================"
+        echo ""
+        if [ -f "checkov-report.sarif" ]; then
+          echo "✅ Análise de segurança concluída"
+          echo "📁 Arquivo SARIF disponível para Code Scanning"
+        else
+          echo "⚠️  Arquivo SARIF não disponível"
+        fi
+        echo ""
+        echo "🎯 Verificações realizadas:"
+        echo "   • CKV_AWS_79: VPC Default Security Group"
+        echo "   • CKV_AWS_130: VPC Subnets IP Assignment"
+        echo "   • CKV_AWS_135: VPC Flow Logs"
+        echo "   • CKV_AWS_83: VPC Endpoints"
+        echo "   • CKV_AWS_24: Security Groups SSH Access"
 
   test:
     name: 'Test'
