@@ -178,12 +178,8 @@ aws-network-lab/
     ├── examples.tf            # Exemplos de uso
     ├── terraform.tfvars.example # Exemplo de variáveis
     └── modules/               # Submódulos
-        ├── region/            # Módulo da região
-        │   ├── main.tf        # Recursos da região
-        │   ├── variables.tf   # Variáveis do módulo
-        │   └── outputs.tf     # Outputs do módulo
-        └── ec2-example/       # Módulo de exemplo com EC2
-            ├── main.tf        # Instâncias de exemplo
+        └── region/            # Módulo da região
+            ├── main.tf        # Recursos da região
             ├── variables.tf   # Variáveis do módulo
             └── outputs.tf     # Outputs do módulo
 ```
