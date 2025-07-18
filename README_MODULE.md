@@ -104,7 +104,6 @@ module "network" {
 | `common_tags` | Tags comuns aplicadas a todos os recursos | `map(string)` | `{}` | não |
 | `project_name` | Nome do projeto | `string` | `"aws-network-lab"` | não |
 | `environment` | Ambiente (dev, staging, prod) | `string` | `"lab"` | não |
-| `aws_profile` | Perfil AWS a ser utilizado | `string` | `"default"` | não |
 
 ### Objeto `regions`
 

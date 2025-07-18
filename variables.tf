@@ -1,9 +1,3 @@
-variable "aws_profile" {
-  description = "Perfil AWS a ser utilizado"
-  type        = string
-  default     = "default"
-}
-
 variable "project_name" {
   description = "Nome do projeto"
   type        = string
