@@ -34,6 +34,16 @@ AWS_ACCESS_KEY_ID     # Sua Access Key ID da AWS
 AWS_SECRET_ACCESS_KEY # Sua Secret Access Key da AWS
 ```
 
+### Configuração Opcional: Code Scanning
+
+Para habilitar o upload dos resultados do Checkov para a aba "Security" do GitHub:
+
+1. Acesse: `Settings` → `Code security and analysis`
+2. Habilite: `Code scanning` → `Set up`
+3. Escolha: `GitHub Actions` → `Configure`
+
+> **Nota**: Se o Code scanning não estiver habilitado, a pipeline continuará funcionando normalmente, apenas o upload do SARIF será ignorado.
+
 ### Como Obter Credenciais AWS
 
 #### Opção 1: IAM User (Recomendado para CI/CD)
